@@ -7,6 +7,12 @@
 
     tools:context="com.hut.cwp.runner.base.activity.MainActivity">
 
-    
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/history" />
+
 
 </RelativeLayout>

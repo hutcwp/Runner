@@ -1,20 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hut.cwp.runner" >
+    package="com.hut.cwp.runner">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".base.activity.MainActivity" >
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".cwp.activity.RunnerMainActivity"
+            android:label="@string/title_activity_runner_main"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".cwp.activity.MapMainActivity"
+            android:label="@string/title_activity_map_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".cwp.activity.HistoryActivity"
+            android:label="@string/title_activity_history"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity android:name=".base.activity.MainActivity">
+
+        </activity>
+
     </application>
 
 </manifest>

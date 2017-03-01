@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Runner</string>
+    <string name="title_activity_runner_main">RunnerMainActivity</string>
+    <string name="title_activity_map_main">MapMainActivity</string>
+    <string name="title_activity_history">HistoryActivity</string>
+    <string name="map">跑步地图</string>
+    <string name="history">历史记录</string>
+    <string name="camera">相机</string>
+    <string name="music">音乐</string>
+    <string name="mileage">里程</string>
+    <string name="speed">速度</string>
+    <string name="time">时间</string>
+    <string name="item_map">地图显示</string>
 </resources>
