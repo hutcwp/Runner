@@ -9,7 +9,7 @@ import com.hut.cwp.runner.R;
 
 public class RunnerMainActivity extends AppCompatActivity {
 
-    TextView map_text = (TextView) findViewById(R.id.map);
+
 
 
     @Override
