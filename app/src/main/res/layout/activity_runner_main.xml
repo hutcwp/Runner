@@ -19,46 +19,63 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/music" />
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
+       <EditText
+           android:layout_width="150dp"
+           android:layout_height="wrap_content"
+           android:hint="设置记录步数的精度"
+           android:inputType="number"
+           android:id="@+id/runner_main_activity_accuracy"/>
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="提交"
+           android:id="@+id/submit_area__"/>
+   </LinearLayout>
 
     <TextView
+        android:id="@+id/runner_main_activity_mileag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:id="@+id/runner_main_activity_mileag"
-        android:textColor="#000"
-        android:padding="@dimen/x3"
         android:layout_gravity="center"
-        android:text="@string/mileage" />
+        android:padding="@dimen/x3"
+        android:text="@string/mileage"
+        android:textColor="#000"
+        android:textSize="20sp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/runner_main_activity_speed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="#000"
             android:padding="@dimen/x5"
-            android:text="@string/speed" />
+            android:text="@string/speed"
+            android:textColor="#000"
+            android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/runner_main_activity_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="#000"
-            android:padding="@dimen/x5"
             android:layout_alignParentRight="true"
-            android:text="@string/time" />
+            android:padding="@dimen/x5"
+            android:text="@string/time"
+            android:textColor="#000"
+            android:textSize="20sp" />
 
     </RelativeLayout>
 
-<com.baidu.mapapi.map.MapView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clickable="true"
-    android:id="@+id/mMapView"/>
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/mMapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true" />
 
 
 </LinearLayout>

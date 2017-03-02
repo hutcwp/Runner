@@ -8,6 +8,8 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,11 +32,17 @@ import com.hut.cwp.runner.R;
 import com.hut.cwp.runner.base.application.MyApplication;
 import com.hut.cwp.runner.reoger.bean.ITypeInfo;
 import com.hut.cwp.runner.reoger.bean.RealtimeTrackData;
+import com.hut.cwp.runner.reoger.methords.DataUtils;
+import com.hut.cwp.runner.reoger.methords.StepDetector;
 import com.hut.cwp.runner.reoger.service.GsonService;
 import com.hut.cwp.runner.reoger.service.MileagSpeedService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static com.baidu.location.h.j.R;
 
 
 public class RunnerMainActivity extends AppCompatActivity {
@@ -60,11 +68,64 @@ public class RunnerMainActivity extends AppCompatActivity {
 
     private MyApplication mMyApplication;
 
+
     private MapView mMapView;
     private BaiduMap mBaiduMap;
-    private TextView mTVMileag;
+    private static TextView mTVMileag;
+    private TextView mTVTime;
+    private static TextView mTVSpeed;
+
+    private int totalTime = 0;
+    private boolean isRunning = true;
+
+    private EditText mAccuracy;
+
+    private Timer timer = new Timer();
+    private TimerTask timerTask = new TimerTask() {
+        @Override
+        public void run() {
+            Message msg = new Message();
+            msg.what = ITypeInfo.Time;
+            totalTime++;
+            mHandler.sendMessage(msg);
+        }
+    };
 
 
+    public Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case ITypeInfo.Distance://传回来的数据是里程信息
+                    Log.d("TAG", "distance" + msg.arg1);
+                    //这里回传的数据是巨距离，单位为m
+                    //// 跑步热量（kcal）＝体重（kg）×距离（公里）×1.036，换算一下 就不做专门的接口了
+                    if (mTVMileag != null) {
+                        mTVMileag.setText(msg.arg1 + " m");
+                    } else {
+                        Log.d("TAG", "如我所料 这里就是空");
+                    }
+                    break;
+                case ITypeInfo.Time:
+                    if (mTVTime != null) {
+                        mTVTime.setText(DataUtils.FormatTime(totalTime));
+                    }
+                    break;
+                case ITypeInfo.Speed:
+                    Bundle bundle = msg.getData();
+                    double v = bundle.getDouble(ITypeInfo.SPEED,0);
+                    Log.d("TAG","cureent v= "+v);
+                    if (mTVSpeed != null) {
+                        mTVSpeed.setText(v+" m/s");
+                    }
+                    break;
+                case ITypeInfo.StepsNum:
+                    break;
+
+            }
+            super.handleMessage(msg);
+        }
+    };
 
 
     @Override
@@ -75,31 +136,51 @@ public class RunnerMainActivity extends AppCompatActivity {
         initOnEntityListener();
         initOnStartTraceListener();
         client.startTrace(trace, startTraceListener);  // 开启轨迹服务
+
         Intent intent = new Intent(this, MileagSpeedService.class);
         startService(intent);
+
+        initTime();
+       findViewById(R.id.submit_area__).setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               int num =  Integer.parseInt(mAccuracy.getText().toString());
+               StepDetector.SENSITIVITY = num;
+               Toast.makeText(getApplicationContext(),"设置成功",Toast.LENGTH_SHORT).show();
+           }
+       });
     }
 
-    public Handler mHandler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what){
-                case ITypeInfo.Distance://传回来的数据是里程信息
-                    Log.d("TAG","distance"+msg.arg1);
-                  //  mTVMileag.setText("12:36");
-                    //这里回传的数据是巨距离，单位为m
-                    //mTVMileag 为空 这里需要需找解决办法
-                    //// 跑步热量（kcal）＝体重（kg）×距离（公里）×1.036，换算一下 就不做专门的接口了
-                    break;
+    private void initTime() {
+        timer.schedule(timerTask, 1000, 1000);
+    }
 
-            }
-            super.handleMessage(msg);
-        }
-    };
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mMapView.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mMapView.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mMapView.onPause();
+    }
+
 
     //初始化各种数据
     private void initView() {
         mMapView = (MapView) findViewById(R.id.mMapView);
         mTVMileag = (TextView) findViewById(R.id.runner_main_activity_mileag);
+        mTVTime = (TextView) findViewById(R.id.runner_main_activity_time);
+        mTVSpeed = (TextView) findViewById(R.id.runner_main_activity_speed);
+        mAccuracy = (EditText) findViewById(R.id.runner_main_activity_accuracy);
 
         mBaiduMap = mMapView.getMap();
         mMyApplication = MyApplication.getMyApplication();
@@ -111,7 +192,6 @@ public class RunnerMainActivity extends AppCompatActivity {
         mGatherInterval = mMyApplication.getGatherInterval();
         mTraceType = mMyApplication.getTraceType();
         mPackInterval = mMyApplication.getPackInterval();
-
 
         trace = new Trace(getApplicationContext(), mServiceId, mEntityName, mTraceType);
         client.setInterval(mMyApplication.getGatherInterval(), mMyApplication.getPackInterval());
