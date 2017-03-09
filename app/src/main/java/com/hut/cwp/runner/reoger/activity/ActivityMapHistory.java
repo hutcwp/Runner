@@ -1,12 +1,8 @@
 package com.hut.cwp.runner.reoger.activity;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.EditText;
 
 import com.baidu.mapapi.map.BaiduMap;
@@ -29,34 +25,34 @@ public class ActivityMapHistory extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map_history);
+        setContentView(R.layout.fragment_map_history);
 
         initView();
 
 
-        mEditText.setOnTouchListener(new View.OnTouchListener() {
-
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    //showDatePickDlg();
-                    return true;
-                }
-                return false;
-            }
-        });
-        mEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    //showDatePickDlg();
-                  //  historyPath.setHistoryTime((int) (/1000));//查看选中日期的轨迹
-                }
-            }
-        });
+//        mEditText.setOnTouchListener(new View.OnTouchListener() {
+//
+//            @RequiresApi(api = Build.VERSION_CODES.N)
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//                    //showDatePickDlg();
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
+//        mEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//
+//            @RequiresApi(api = Build.VERSION_CODES.N)
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (hasFocus) {
+//                    //showDatePickDlg();
+//                  //  historyPath.setHistoryTime((int) (/1000));//查看选中日期的轨迹
+//                }
+//            }
+//        });
     }
 
     private void initView() {

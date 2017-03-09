@@ -2,7 +2,6 @@ package com.hut.cwp.runner.cwp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -49,7 +48,7 @@ public class RunnerMainActivity extends AppCompatActivity implements View.OnClic
 
     private StartLBSThread threadLBS;
 
-    private boolean isRunning = false;
+    private boolean isRunning = true;
 
     
 
@@ -216,12 +215,18 @@ public class RunnerMainActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(getApplicationContext(),"正在跑步中，不能中途退出，请结束后在退出本界面",Toast.LENGTH_LONG).show();
-    }
+
+        if(isRunning) {
+            Toast.makeText(getApplicationContext(), "正在跑步中，不能中途退出，请结束后在退出本界面", Toast.LENGTH_LONG).show();
+        }
+        else{
+            super.onBackPressed();
+        }
+        }
 
     //暂停跑步
     public void pauseRun() {
-        time.setPause(isRunning);
+        time.setPause(!isRunning);
         isRunning = !isRunning;
 
         if (isRunning) {

@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.hut.cwp.runner.R;
 import com.hut.cwp.runner.cwp.activity.RunnerMainActivity;
-import com.hut.cwp.runner.reoger.activity.ActivityMapHistory;
+import com.hut.cwp.runner.cwp.activity.HistoryShowActivity;
 
 public class GuideActivity extends AppCompatActivity {
 
@@ -33,7 +33,7 @@ public class GuideActivity extends AppCompatActivity {
     }
 
     public void showHistoryTrace(View view) {
-        Intent intent = new Intent(GuideActivity.this, ActivityMapHistory.class);
+        Intent intent = new Intent(GuideActivity.this, HistoryShowActivity.class);
         startActivity(intent);
     }
 

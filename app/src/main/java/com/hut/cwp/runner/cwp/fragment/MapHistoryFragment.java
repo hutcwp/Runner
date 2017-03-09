@@ -18,7 +18,7 @@ import com.hut.cwp.runner.reoger.methords.DrawHistoryPath;
  * Created by Adminis on 2017/3/7.
  */
 
-public class Fragment2 extends Fragment {
+public class MapHistoryFragment extends Fragment   {
 
     private MapView mapView;
 
@@ -27,26 +27,26 @@ public class Fragment2 extends Fragment {
     private DrawHistoryPath historyPath;
 
 
-    private TextView text;
+    private TextView text_mils,text_time;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // TODO Auto-generated method stub
-        View view = inflater.inflate(R.layout.activity_map_history, container, false);
-
+        View view = inflater.inflate(R.layout.fragment_map_history, container, false);
 
         initView(view);
 
 
         String html = "<font color='black' face='verdana'><size>31.1 </size>公里</font>";
-        text.setText(Html.fromHtml(html, null, new SizeLabel(80)));
+        text_mils.setText(Html.fromHtml(html, null, new SizeLabel(80)));
 
-        text.setOnClickListener(new View.OnClickListener() {
+        text_mils.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                String html = "<font color='red' face='verdana'><size>自定义Html标签</size>普通的大小</font>";
-//                text.setText(Html.fromHtml(html,null,new SizeLabel(20)));
+//                text_mils.setText(Html.fromHtml(html,null,new SizeLabel(20)));
 
             }
         });
@@ -58,7 +58,8 @@ public class Fragment2 extends Fragment {
 
     private void initView(View view) {
 
-        text = (TextView) view.findViewById(R.id.text_mils);
+        text_time = (TextView) view.findViewById(R.id.text_time);
+        text_mils = (TextView) view.findViewById(R.id.text_mils);
         mapView = (MapView) view.findViewById(R.id.activity_map);
 
 
@@ -66,6 +67,7 @@ public class Fragment2 extends Fragment {
         historyPath = new DrawHistoryPath(getActivity(), mapView);
         historyPath.startDrawMethord();
     }
+
 
 
 //    @RequiresApi(api = Build.VERSION_CODES.N)

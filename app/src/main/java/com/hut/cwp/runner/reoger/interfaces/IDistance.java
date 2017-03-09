@@ -7,6 +7,6 @@ package com.hut.cwp.runner.reoger.interfaces;
 public interface IDistance {
     void getDistance(int distance);
     void getSpeed(double v);
-    void getTime(String tiem);
+    void getTime(String time);
     void getSteps(int steps);
 }

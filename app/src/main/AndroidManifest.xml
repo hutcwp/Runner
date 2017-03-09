@@ -82,10 +82,6 @@
             android:label="@string/title_activity_map_main"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".cwp.activity.HistoryActivity"
-            android:label="@string/title_activity_history"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <service android:name=".reoger.service.MileagSpeedService" />
 
@@ -98,20 +94,21 @@
             android:name=".base.activity.GuideActivity"
             android:label="@string/title_activity_guide"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
         <activity android:name=".reoger.activity.ActivityMapHistory" />
 
         <activity
-            android:name=".cwp.activity.ViewPageActivity"
+            android:name=".cwp.activity.HistoryShowActivity"
             android:label="@string/title_activity_view_pager"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
     </application>
