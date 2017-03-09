@@ -1,11 +1,13 @@
-package com.hut.cwp.runner.cwp.activity;
+package com.hut.cwp.runner.cwp.fragment;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.hut.cwp.runner.R;
@@ -23,7 +25,12 @@ import lecho.lib.hellocharts.model.ValueShape;
 import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
 
-public class HistoryActivity extends AppCompatActivity {
+/**
+ * Created by Adminis on 2017/3/7.
+ */
+
+public class Fragment1 extends Fragment {
+
 
     private LineChartView mChartView;
 
@@ -38,33 +45,30 @@ public class HistoryActivity extends AppCompatActivity {
 
     private Random random = new Random();
 
-    private List<PointValue> myPoints = new ArrayList<>();
+
+    private Button btn_back;
 
 
-
-    private Button btn_back, btn_more;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
+        View view=inflater.inflate(R.layout.activity_history, container, false);
 
-        setContentView(R.layout.activity_history);
+        btn_back = (Button) view.findViewById(R.id.btn_back);
 
-        btn_back = (Button) findViewById(R.id.btn_back);
-
-        initView();
+        initView(view);
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                HistoryActivity.this.finish();
+                getActivity().finish();
             }
         });
-
-
+        return view;
     }
-
     /**
      * 初始化节点信息
      */
@@ -91,15 +95,11 @@ public class HistoryActivity extends AppCompatActivity {
 
     }
 
-    //用于外界调用改变图标节点
-    public void setPointValues(List<PointValue> pointValue) {
 
-        this.pointValues = pointValues;
-    }
 
     private void setChart() {
 
-        mChartView.setZoomEnabled(true);//设置是否支持缩放
+        mChartView.setZoomEnabled(false);//设置是否支持缩放
 //        mChartView.setOnValueTouchListener(LineChartOnValueSelectListener touchListener);//为图表设置值得触摸事件
         mChartView.setInteractive(true);//设置图表是否可以与用户互动
         mChartView.setValueSelectionEnabled(true);//设置图表数据是否选中进行显示
@@ -164,9 +164,9 @@ public class HistoryActivity extends AppCompatActivity {
         lines.add(line); // 将数据集合添加线
     }
 
-    private void initView() {
+    private void initView(View view) {
 
-        mChartView = (LineChartView) findViewById(R.id.chart);
+        mChartView = (LineChartView) view.findViewById(R.id.chart);
         // 节点数据结合
         pointValues = new ArrayList<>();
         axisY = new Axis().setHasLines(true);// Y轴属性

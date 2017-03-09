@@ -144,6 +144,7 @@ public class StepDcretor2 implements SensorEventListener {
             Log.v(TAG, "计步中 TEMP_STEP:" + TEMP_STEP);
         } else if (CountTimeState == 2) {
             CURRENT_SETP++;
+            Log.d("TAG","步数显示在这里:"+CURRENT_SETP);
             if (onSensorChangeListener != null) {
                 onSensorChangeListener.onChange();
             }

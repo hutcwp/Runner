@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#47ae88"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="@dimen/x160"
+        android:layout_height="@dimen/x160"
+        android:text="@string/start_running"
+        android:elevation="@dimen/x60"
+        android:translationZ="@dimen/x40"
+        android:background="@drawable/btn_start"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="@dimen/x60"
+        android:layout_height="@dimen/x60"
+        android:layout_alignParentRight="true"
+        android:onClick="showHistoryTrace"
+        android:layout_margin="@dimen/x20"
+        android:background="@drawable/history"
+      />
+
+
+    <View
+        android:id="@+id/line"
+        android:layout_below="@id/btn_start"
+        android:layout_marginTop="@dimen/y180"
+        android:layout_width="@dimen/x300"
+        android:layout_centerHorizontal="true"
+        android:layout_height="2dp"
+        android:background="#6790ce"
+        />
+
+    <View
+        android:layout_below="@id/btn_start"
+        android:layout_marginTop="@dimen/y178"
+        android:layout_width="@dimen/x280"
+        android:layout_centerHorizontal="true"
+        android:layout_height="2dp"
+        android:background="#6790ce"
+        />
+
+    <View
+        android:layout_below="@id/btn_start"
+        android:layout_marginTop="@dimen/y176"
+        android:layout_width="@dimen/x260"
+        android:layout_centerHorizontal="true"
+        android:layout_height="2dp"
+        android:background="#6790ce"
+        />
+
+    <View
+        android:layout_below="@id/btn_start"
+        android:layout_marginTop="@dimen/y174"
+        android:layout_width="@dimen/x240"
+        android:layout_centerHorizontal="true"
+        android:layout_height="2dp"
+        android:background="#6790ce"
+        android:id="@+id/view" />
+
+    <ImageView
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/y100"
+        android:src="@drawable/run"
+        android:layout_alignBottom="@+id/view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp"
+        android:id="@+id/imageView" />
+
+
+
+</RelativeLayout>

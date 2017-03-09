@@ -12,6 +12,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.hut.cwp.runner.reoger.methords.StepCountModeDispatcher;
+import com.hut.cwp.runner.reoger.methords.StepDcretor2;
 import com.hut.cwp.runner.reoger.methords.StepDetector;
 import com.hut.cwp.runner.reoger.threads.DetInfoFromIntent;
 
@@ -33,6 +34,8 @@ public class MileagSpeedService extends Service {
     private PowerManager.WakeLock mWakeLock;// 屏幕灯
 
 
+    private StepDcretor2 dcretor2;
+
     StepCountModeDispatcher dispatcher;
     boolean isSuppoort;
 
@@ -53,6 +56,9 @@ public class MileagSpeedService extends Service {
 
             // 创建监听器类，实例化监听对象
             detector = new StepDetector(this);
+
+            dcretor2 = new StepDcretor2(this);
+
 
             // 获取传感器的服务，初始化传感器
             mSensorManager = (SensorManager) this.getSystemService(SENSOR_SERVICE);

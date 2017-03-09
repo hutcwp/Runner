@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hut.cwp.runner">
 
+    <!-- 操作sd卡的权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <!-- 这个权限用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -45,6 +48,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <uses-feature android:name="android.hardware.sensor.accelerometer" />
+
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <!-- 允许应用程序更改主屏幕中的设置和快捷方式 -->
@@ -57,22 +61,51 @@
         android:name="android.hardware.sensor.stepdetector"
         android:required="true" />
 
-
     <application
-        android:name="com.hut.cwp.runner.base.application.MyApplication"
+        android:name=".base.application.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="5IEaZutgBEeUqeOUMjukfsbnFQViNQFH" />
 
         <activity
-            android:name=".cwp.activity.RunnerMainActivity"
+            android:name=".cwp.activity.RunnerMapActivity"
             android:label="@string/title_activity_runner_main"
+            android:launchMode="singleInstance"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".cwp.activity.RunnerMainActivity"
+            android:label="@string/title_activity_map_main"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".cwp.activity.HistoryActivity"
+            android:label="@string/title_activity_history"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <service android:name=".reoger.service.MileagSpeedService" />
+
+        <service
+            android:name="com.baidu.trace.LBSTraceService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".base.activity.GuideActivity"
+            android:label="@string/title_activity_guide"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+        <activity android:name=".reoger.activity.ActivityMapHistory" />
+
+        <activity
+            android:name=".cwp.activity.ViewPageActivity"
+            android:label="@string/title_activity_view_pager"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -80,26 +113,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".cwp.activity.MapMainActivity"
-            android:label="@string/title_activity_map_main"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".cwp.activity.HistoryActivity"
-            android:label="@string/title_activity_history"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-        <activity android:name=".base.activity.MainActivity">
-
-        </activity>
-
-        <service android:name=".reoger.service.MileagSpeedService"/>
-
-        <service
-            android:name="com.baidu.trace.LBSTraceService"
-            android:enabled="true"
-            android:exported="true" />
 
     </application>
 

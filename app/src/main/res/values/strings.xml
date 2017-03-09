@@ -11,4 +11,8 @@
     <string name="speed">速度</string>
     <string name="time">时间</string>
     <string name="item_map">地图显示</string>
+    <string name="photo">相册</string>
+    <string name="title_activity_guide">GuideActivity</string>
+    <string name="start_running">开始跑步</string>
+    <string name="title_activity_view_pager">ViewPager</string>
 </resources>
