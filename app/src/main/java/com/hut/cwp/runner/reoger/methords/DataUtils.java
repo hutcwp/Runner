@@ -32,11 +32,16 @@ public class DataUtils {
 
     private List<Double> previouslyDistance = new ArrayList<>();
 
+<<<<<<< HEAD
     double ditance;
     //// 跑步热量（kcal）＝体重（kg）×距离（公里）×1.036，换算一下 就不做专门的接口了
 
 
     private int previouslyCountSetp = 0;
+=======
+    private List<Double> previouslyDistance = new ArrayList<>();
+    double ditance ;
+>>>>>>> origin/master
 
     public DataUtils(int startTime) {
         this.myApplication = MyApplication.getMyApplication();
@@ -75,6 +80,7 @@ public class DataUtils {
             super.onQueryDistanceCallback(s);
             Log.d("TAG", "查询里程回调的接口，数据是" + s);
             DistanceJson distanceJson = GsonService.parseJson(s, DistanceJson.class);
+<<<<<<< HEAD
             Log.d("TAG", "距离是" + distanceJson.getDistance());
             //从这里回传距离信息
             mRunnerMainActivity.getDistance((int) distanceJson.getDistance());
@@ -88,11 +94,27 @@ public class DataUtils {
             Log.d("TAG", "距离是" + previouslyDistance);
 
 
+=======
+            if(previouslyDistance.size()>=2){
+                Double a = previouslyDistance.get(1);
+               previouslyDistance.clear();
+                previouslyDistance.add(a);
+            }
+            ditance = distanceJson.getDistance();
+            previouslyDistance.add(ditance);
+            Log.d("TAG", "距离是" + previouslyDistance);
+            //从这里回传距离信息
+            Message message = new Message();
+            message.what = ITypeInfo.Distance;
+            message.arg1 = (int) ditance;
+            mainActivity.mHandler.sendMessage(message);
+>>>>>>> origin/master
         }
     };
 
 
     //获取当前速度
+<<<<<<< HEAD
     public void getCurrentSpeed() {
         double distance;
         double spends[] = new double[2];
@@ -136,8 +158,66 @@ public class DataUtils {
 
 
         mRunnerMainActivity.getSpeed(realV);
+=======
+    //计算公式 5s内走的里程/5 （m/s）*3.6 = km/h
+    public void getCurrentSpeed() {
+        double distance;
+        double v;
+        if(previouslyDistance.size()>1){
+            distance = Math.abs(previouslyDistance.get(0)-previouslyDistance.get(1));
+            v = distance/5;
+        }else{
+            v = 0;
+        }
+
+        Message msg = new Message();
+        msg.what = ITypeInfo.Speed;
+        Bundle bundle = new Bundle();
+        bundle.putDouble(ITypeInfo.SPEED, v);
+        msg.setData(bundle);
+        Log.d("TAG","速度"+v);
+        mainActivity.mHandler.sendMessage(msg);
+>>>>>>> origin/master
     }
 
+    /**
+     * 将时间格式化
+     *
+     * @param time
+     * @return
+     */
+    public static String FormatTime(int time) {
+        String timeStr = null;
+        int hour = 0;
+        int minute = 0;
+        int second = 0;
+        if (time <= 0)
+            return "00:00";
+        else {
+            minute = time / 60;
+            if (minute < 60) {
+                second = time % 60;
+                timeStr = unitFormat(minute) + ":" + unitFormat(second);
+            } else {
+                hour = minute / 60;
+                if (hour > 99)
+                    return "99:59:59";
+                minute = minute % 60;
+                second = time - hour * 3600 - minute * 60;
+                timeStr = unitFormat(hour) + ":" + unitFormat(minute) + ":" + unitFormat(second);
+            }
+        }
+        return timeStr;
+    }
+
+    public static String unitFormat(int i) {
+        String retStr = null;
+        if (i >= 0 && i < 10)
+            retStr = "0" + Integer.toString(i);
+        else
+            retStr = "" + i;
+        return retStr;
+    }
 
     /**
      * 将时间格式化
