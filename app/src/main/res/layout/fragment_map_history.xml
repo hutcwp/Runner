@@ -4,11 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.baidu.mapapi.map.MapView
-        android:id="@+id/activity_map"
+    <com.amap.api.maps.MapView
+        android:id="@+id/map"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+        android:layout_height="match_parent"/>
 
 
     <LinearLayout
@@ -25,12 +24,13 @@
             android:layout_gravity="center">
 
             <TextView
-                android:id="@+id/text_mils"
+                android:id="@+id/text_distance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="5.04" />
+                android:text="里程"
+                android:textSize="42sp" />
 
 
         </LinearLayout>
@@ -45,31 +45,32 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/time"
+                android:id="@+id/text_alltime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="01:41:31"
+                android:text="00:00:00"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
             <TextView
-
+                android:id="@+id/text_vector"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="20'07''"
+                android:text="0'0''"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/text_calorie"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="270.9"
+                android:text="0"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 

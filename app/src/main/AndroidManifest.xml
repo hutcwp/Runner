@@ -62,28 +62,20 @@
         android:required="true" />
 
     <application
-        android:name=".base.application.MyApplication"
+        android:name=".app.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="5IEaZutgBEeUqeOUMjukfsbnFQViNQFH" />
+            android:value="jmCzEpMG6bFgaV5sab9YiC9SXkkTnYqo" />
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="82dd09c714abdff54ebc4cfc9e236300" />
 
-        <activity
-            android:name=".cwp.activity.RunnerMapActivity"
-            android:label="@string/title_activity_runner_main"
-            android:launchMode="singleInstance"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".cwp.activity.RunnerMainActivity"
-            android:label="@string/title_activity_map_main"
-            android:launchMode="singleTask"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <service android:name=".reoger.service.MileagSpeedService" />
+        <service android:name="com.amap.api.location.APSService" />
 
         <service
             android:name="com.baidu.trace.LBSTraceService"
@@ -91,22 +83,34 @@
             android:exported="true" />
 
         <activity
-            android:name=".base.activity.GuideActivity"
-            android:label="@string/title_activity_guide"
+            android:name=".guidepage.GuideActivity"
             android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
         </activity>
 
-        <activity android:name=".reoger.activity.ActivityMapHistory" />
 
         <activity
-            android:name=".cwp.activity.HistoryShowActivity"
+            android:name=".history.HistoryShowActivity"
             android:label="@string/title_activity_view_pager"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".homepage.MainActivity"
+            android:label="@string/title_activity_my"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+
+        <activity
+            android:name=".dao.MainActivity"
+            android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>

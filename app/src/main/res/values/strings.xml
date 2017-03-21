@@ -15,4 +15,7 @@
     <string name="title_activity_guide">GuideActivity</string>
     <string name="start_running">开始跑步</string>
     <string name="title_activity_view_pager">ViewPager</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_test">Test</string>
+    <string name="title_activity_my">MyActivity</string>
 </resources>

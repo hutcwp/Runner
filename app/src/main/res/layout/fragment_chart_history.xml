@@ -80,12 +80,13 @@
         android:background="#F5F5F5" />
 
 
-    <lecho.lib.hellocharts.view.LineChartView
-        android:id="@+id/chart"
-        android:layout_width="@dimen/x680"
-        android:layout_height="@dimen/y520"
-        android:layout_margin="@dimen/x20"
-        android:layout_marginTop="@dimen/y20" />
+    <lecho.lib.hellocharts.view.ColumnChartView
+        android:id="@+id/columnchart"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/y580"
+        android:layout_margin="@dimen/x20">
+
+    </lecho.lib.hellocharts.view.ColumnChartView>
 
 
     <View
@@ -113,6 +114,7 @@
                 android:textColor="#000" />
 
             <TextView
+                android:id="@+id/text_char_alltime"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
@@ -141,6 +143,7 @@
                 android:textColor="#000" />
 
             <TextView
+                android:id="@+id/text_chart_calorie"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
@@ -169,6 +172,7 @@
                 android:textColor="#000" />
 
             <TextView
+                android:id="@+id/text_chart_vector"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
@@ -177,11 +181,6 @@
                 android:textColor="#000" />
 
         </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#F5F5F5" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -192,18 +191,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="平均速度"
+                android:text="距离"
                 android:textColor="#000" />
 
             <TextView
+                android:id="@+id/text_chart_distance"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:gravity="center"
-                android:text="2.9  公里/时"
+                android:text="5 km"
                 android:textColor="#000" />
 
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F5F5F5" />
 
         <View
             android:layout_width="match_parent"

@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    buildToolsVersion '25.0.0'
 
     android {
         dataBinding {
@@ -27,18 +27,33 @@ android {
     }
 }
 
+
+allprojects {
+    repositories {
+
+        maven { url "https://jitpack.io" }
+    }
+}
+
+
 dependencies {
+
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile "com.android.support:design:24.1.1"
     compile 'com.github.lecho:hellocharts-library:1.5.8@aar'
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support:design:24.2.1'
+
     testCompile 'junit:junit:4.12'
+
     compile files('libs/BaiduLBS_Android.jar')
     compile files('libs/BaiduTraceSDK_v2_1_16.jar')
     compile files('libs/gson-2.2.1.jar')
+    compile files('libs/AMap3DMap_5.0.0_AMapLocation_3.3.0_20170311.jar')
+    compile files('libs/AMap_Location_v2.3.0_20160112.jar')
+    compile files('libs/3DMapV3_177.jar')
+
+
+    compile 'com.github.GrenderG:Toasty:1.1.4'
 }
