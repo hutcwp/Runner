@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                DBUtils.getInstance(MainActivity.this).select();
+                DBUtils.getInstance(MainActivity.this).selectFromDaily();
             }
         });
 
@@ -46,16 +46,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                RunData runData = new RunData();
+                RunDailyData runDailyData = new RunDailyData();
 
-                runData.setDate("2017-02-21");
-                runData.setTime("08:20");
-                runData.setAlltime(1);
-                runData.setCalorie(105.1f);
-                runData.setVector(1.4f);
-                runData.setDistance(14.1f);
+                runDailyData.setDate("2017-02-21");
+                runDailyData.setTime("08:20");
+                runDailyData.setSpendtime(1);
+                runDailyData.setCalorie(105.1f);
+                runDailyData.setVector(1.4f);
+                runDailyData.setDistance(14.1f);
 
-                DBUtils.getInstance(MainActivity.this).insert(runData);
+                DBUtils.getInstance(MainActivity.this).insertToDailyTable(runDailyData);
             }
         });
 

@@ -115,6 +115,11 @@
 
         </activity>
 
+
+        <activity android:name=".test.recordpath3d.RecordActivity" />
+        <activity android:name=".test.recordpath3d.RecordShowActivity" />
+        
+        
     </application>
 
 </manifest>

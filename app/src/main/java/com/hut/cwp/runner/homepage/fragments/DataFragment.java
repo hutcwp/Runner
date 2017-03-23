@@ -36,7 +36,6 @@ public class DataFragment extends Fragment implements View.OnClickListener {
 
 
     private Button btn_camera, btn_photo, btn_music;
-    private Button btn_pause, btn_finish;
 
 
     private TextView text_time, text_miles, text_vector;
@@ -81,8 +80,7 @@ public class DataFragment extends Fragment implements View.OnClickListener {
         btn_photo = (Button) view.findViewById(R.id.btn_photo);
         btn_music = (Button) view.findViewById(R.id.btn_music);
 
-        btn_pause = (Button) view.findViewById(R.id.btn_pause);
-        btn_finish = (Button) view.findViewById(R.id.btn_finish);
+
 
         text_miles = (TextView) view.findViewById(R.id.text_distance);
         text_vector = (TextView) view.findViewById(R.id.text_vector);
@@ -105,8 +103,7 @@ public class DataFragment extends Fragment implements View.OnClickListener {
         btn_camera.setOnClickListener(this);
         btn_photo.setOnClickListener(this);
         btn_music.setOnClickListener(this);
-        btn_pause.setOnClickListener(this);
-        btn_finish.setOnClickListener(this);
+
     }
 
 
@@ -127,24 +124,6 @@ public class DataFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_music:
 
                 mMusic.playMusic();
-                break;
-
-            case R.id.btn_pause:
-
-                if (btn_pause.getText().equals("暂停")) {
-
-                    mActivity.pauseLocation();
-                    btn_pause.setText("继续");
-                } else {
-
-                    mActivity.startLocation();
-                    btn_pause.setText("暂停");
-                }
-                break;
-
-            case R.id.btn_finish:
-
-                mActivity.closeLocation();
                 break;
 
             default:

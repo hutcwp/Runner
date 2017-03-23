@@ -10,7 +10,8 @@ import android.widget.TextView;
 
 import com.hut.cwp.runner.R;
 import com.hut.cwp.runner.dao.DBUtils;
-import com.hut.cwp.runner.dao.RunData;
+import com.hut.cwp.runner.dao.RunDailyData;
+import com.hut.cwp.runner.dao.RunMouthData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +65,7 @@ public class ChartHistoryFragment extends Fragment {
 
     public void readDataFromDB(){
 
-        List<RunData> list = DBUtils.getInstance(getActivity()).select();
+        List<RunMouthData> list = DBUtils.getInstance(getActivity()).selectFromMouth();
 
         if (list.size()>0){
 
@@ -74,12 +75,12 @@ public class ChartHistoryFragment extends Fragment {
     }
 
 
-    public void upDateTextData(RunData data){
+    public void upDateTextData(RunMouthData data){
 
-        text_chart_distance.setText(data.getDistance()+" m");
+        text_chart_distance.setText(data.getAlldistance()+" m");
         text_chart_alltime.setText(data.getAlltime()+" h");
-        text_chart_calorie.setText(data.getCalorie()+" ka");
-        text_chart_vector.setText(data.getVector()+" m/s");
+        text_chart_calorie.setText(data.getAllcalorie()+" ka");
+        text_chart_vector.setText(data.getAllvector()+" m/s");
 
     }
 
@@ -108,7 +109,7 @@ public class ChartHistoryFragment extends Fragment {
         List<Column> columns = new ArrayList<>();
         List<SubcolumnValue> values;
 
-        List<RunData> datalist = DBUtils.getInstance(getActivity()).select();
+        List<RunDailyData> datalist = DBUtils.getInstance(getActivity()).selectFromDaily();
 
         int numColumns = datalist.size();
 
@@ -117,7 +118,7 @@ public class ChartHistoryFragment extends Fragment {
             values = new ArrayList<>();
             for (int j = 0; j < numSubcolumns; ++j) {
 
-                RunData data = datalist.get(i);
+                RunDailyData data = datalist.get(i);
                 if (data != null) {
 
                     float value = data.getDistance();
@@ -175,7 +176,7 @@ public class ChartHistoryFragment extends Fragment {
 //            values = new ArrayList<>();
 //            for (int j = 0; j < numSubcolumns; ++j) {
 //
-//                RunData data = datalist.get(i);
+//                RunDailyData data = datalist.get(i);
 //                if (data != null) {
 //
 //                    float value = (float) Math.random() * 50f;

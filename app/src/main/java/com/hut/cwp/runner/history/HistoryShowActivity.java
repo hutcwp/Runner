@@ -12,7 +12,7 @@ import android.widget.Button;
 
 import com.hut.cwp.runner.R;
 import com.hut.cwp.runner.dao.DBUtils;
-import com.hut.cwp.runner.dao.RunData;
+import com.hut.cwp.runner.dao.RunDailyData;
 import com.hut.cwp.runner.history.fragments.ChartHistoryFragment;
 import com.hut.cwp.runner.history.fragments.MapHistoryFragment;
 
@@ -28,7 +28,7 @@ public class HistoryShowActivity extends FragmentActivity {
 
     private FragAdapter adapter;
 
-    private List<RunData> datas = new ArrayList<>();
+    private List<RunDailyData> datas = new ArrayList<>();
 
     private Button btn_back;
 
@@ -45,9 +45,9 @@ public class HistoryShowActivity extends FragmentActivity {
         /**
          * log中会多出一次查询信息
          */
-        datas = DBUtils.getInstance(HistoryShowActivity.this).select();
+        datas = DBUtils.getInstance(HistoryShowActivity.this).selectFromDaily();
 
-        for (RunData data : datas) {
+        for (RunDailyData data : datas) {
 
             Log.i("MyData","*****History****");
             Log.i("MyData", "id: " + data.getId());

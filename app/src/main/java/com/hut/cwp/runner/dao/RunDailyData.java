@@ -4,13 +4,13 @@ package com.hut.cwp.runner.dao;
  * Created by Adminis on 2017/3/20.
  */
 
-public class RunData {
+public class RunDailyData {
 
     /**
      * 运动数据实体类
      * id        序号
      * time      时间
-     * alltime   总时间
+     * spendtime   总时间
      * calorie   卡路里
      * vector    速度
      * distance  路程
@@ -19,7 +19,7 @@ public class RunData {
     private int id;
     private String time;
     private String date ;
-    private float alltime;
+    private float spendtime;
     private float calorie;
     private float vector;
     private float distance;
@@ -41,12 +41,12 @@ public class RunData {
         this.time = time;
     }
 
-    public float getAlltime() {
-        return alltime;
+    public float getSpendtime() {
+        return spendtime;
     }
 
-    public void setAlltime(float alltime) {
-        this.alltime = alltime;
+    public void setSpendtime(float spendtime) {
+        this.spendtime = spendtime;
     }
 
     public String getDate() {

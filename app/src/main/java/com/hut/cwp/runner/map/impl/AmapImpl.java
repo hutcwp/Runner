@@ -1,6 +1,7 @@
 package com.hut.cwp.runner.map.impl;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -17,9 +18,9 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
-import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.CameraPosition;
@@ -31,12 +32,15 @@ import com.amap.api.maps.utils.SpatialRelationUtil;
 import com.amap.api.maps.utils.overlay.SmoothMoveMarker;
 import com.hut.cwp.runner.R;
 import com.hut.cwp.runner.dao.DBUtils;
-import com.hut.cwp.runner.dao.RunData;
+import com.hut.cwp.runner.dao.RunDailyData;
 import com.hut.cwp.runner.homepage.MainActivity;
 import com.hut.cwp.runner.map.sub.SubMap;
+import com.hut.cwp.runner.test.database.DbAdapter;
+import com.hut.cwp.runner.test.record.PathRecord;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
@@ -49,7 +53,7 @@ public class AmapImpl extends SubMap implements LocationSource, AMapLocationList
 
 
     private AMap aMap;
-    private MapView mapView;
+
 
     private MainActivity activity;
 
@@ -76,28 +80,51 @@ public class AmapImpl extends SubMap implements LocationSource, AMapLocationList
 
     private static AmapImpl mAmapImpl;
 
-
     private SensorManager mSM;
     private Sensor mSensor;
 
-
     private static float angle = 0;
 
-    public static AmapImpl getInstance(Activity activity, AMap aMap, MapView mapView) {
+
+//**************************************
+    private PathRecord record;
+    private PolylineOptions mPolyoptions;
+
+    private long mStartTime;
+    private long mEndTime;
+    private DbAdapter DbHepler;
+
+    public static AmapImpl getInstance(Activity activity, AMap aMap) {
 
 
-        mAmapImpl = new AmapImpl(activity, aMap, mapView);
+        mAmapImpl = new AmapImpl(activity, aMap);
 
         return mAmapImpl;
     }
 
 
-    private AmapImpl(Activity activity, AMap aMap, MapView mapView) {
+    private AmapImpl(Activity activity, AMap aMap ) {
+
         this.aMap = aMap;
         this.activity = (MainActivity) activity;
-        this.mapView = mapView;
+
+
+        initRecord();
+        initpolyline();
+
     }
 
+
+    public void initRecord(){
+        aMap.clear();
+
+        if (record != null) {
+            record = null;
+        }
+        record = new PathRecord();
+        mStartTime = System.currentTimeMillis();
+        record.setDate(getcueDate(mStartTime));
+    }
 
     @Override
     public void startLocation() {
@@ -109,9 +136,11 @@ public class AmapImpl extends SubMap implements LocationSource, AMapLocationList
             mUiSettings.setAllGesturesEnabled(false);
             isRunning = true;
 
+
             if (isFirstLatLng) {
 
                 Toasty.normal(activity, "开启新的一次跑步", Toast.LENGTH_SHORT).show();
+
             } else {
 
                 Toasty.normal(activity, "运动已恢复").show();
@@ -149,6 +178,8 @@ public class AmapImpl extends SubMap implements LocationSource, AMapLocationList
 
         saveRunningData();
 
+        mEndTime = System.currentTimeMillis();
+        saveRecord(record.getPathline(), record.getDate());
 //        deactivate();
 
         Log.e("MyTAG", "stopLoc");
@@ -175,19 +206,16 @@ public class AmapImpl extends SubMap implements LocationSource, AMapLocationList
         SimpleDateFormat tDateFormat = new SimpleDateFormat("hh:mm:ss");
         String time = tDateFormat.format(new java.util.Date());
 
-        RunData data = new RunData();
+        RunDailyData data = new RunDailyData();
 
         data.setTime(time);
         data.setDate(date);
         data.setDistance(distance);
-        data.setAlltime(0);
+        data.setSpendtime(0);
         data.setVector(vector);
         data.setCalorie(distance * 10);
 
-
-
-        DBUtils.getInstance(activity).insert(data);
-
+        DBUtils.getInstance(activity).insertToDailyTable(data);
 
     }
 
@@ -247,29 +275,17 @@ public class AmapImpl extends SubMap implements LocationSource, AMapLocationList
     public void init() {
 
         mUiSettings = aMap.getUiSettings();//实例化UiSettings类对象
-
         myLocationStyle = new MyLocationStyle();//初始化定位蓝点样式
-
-        // 连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。
-        // （1秒1次定位）如果不设置myLocationType，默认也会执行此种模式。
-
         myLocationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(R.drawable.local1));
-
-        // 设置定位蓝点的icon图标方法，需要用到BitmapDescriptor类对象作为参数。
-
         aMap.setMyLocationStyle(myLocationStyle);
-
         aMap.getUiSettings().setMyLocationButtonEnabled(true);
-
         // 设置定位监听
         aMap.setLocationSource(this);
         // 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
         aMap.setMyLocationEnabled(true);
-
         // 设置定位的类型为定位模式，有定位、跟随或地图根据面向方向旋转几种
 
         aMap.setMyLocationType(AMap.LOCATION_TYPE_MAP_FOLLOW);
-
 
         mSM = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSM.getDefaultSensor(Sensor.TYPE_ORIENTATION);
@@ -305,6 +321,11 @@ public class AmapImpl extends SubMap implements LocationSource, AMapLocationList
 
                 // 获取新的定位位置
                 LatLng newLatLng = localUtils.getLocationLatLng(aMapLocation);
+
+                record.addpoint(aMapLocation);
+                mPolyoptions.add(newLatLng);
+                redrawline();
+
 
                 if (isFirstLatLng) {
                     //记录第一次的定位信息
@@ -521,4 +542,107 @@ public class AmapImpl extends SubMap implements LocationSource, AMapLocationList
 
     }
 
+
+    @SuppressLint("SimpleDateFormat")
+    private String getcueDate(long time) {
+        SimpleDateFormat formatter = new SimpleDateFormat(
+                "yyyy-MM-dd  HH:mm:ss ");
+        Date curDate = new Date(time);
+        String date = formatter.format(curDate);
+        return date;
+    }
+
+    protected void saveRecord(List<AMapLocation> list, String time) {
+
+        if (list != null && list.size() > 0) {
+
+            DbHepler = new DbAdapter(activity);
+            DbHepler.open();
+
+            String duration = getDuration();
+            float distance = getDistance(list);
+            String average = getAverage(distance);
+            String pathlineSring = getPathLineString(list);
+
+            AMapLocation firstLocaiton = list.get(0);
+            AMapLocation lastLocaiton = list.get(list.size() - 1);
+            String stratpoint = amapLocationToString(firstLocaiton);
+            String endpoint = amapLocationToString(lastLocaiton);
+            DbHepler.createrecord(String.valueOf(distance), duration, average,
+                    pathlineSring, stratpoint, endpoint, time);
+            DbHepler.close();
+        } else {
+            Toast.makeText(activity, "没有记录到路径", Toast.LENGTH_SHORT)
+                    .show();
+        }
+    }
+
+
+    private String getDuration() {
+        return String.valueOf((mEndTime - mStartTime) / 1000f);
+    }
+
+    private String getAverage(float distance) {
+        return String.valueOf(distance / (float) (mEndTime - mStartTime));
+    }
+
+    private float getDistance(List<AMapLocation> list) {
+        float distance = 0;
+        if (list == null || list.size() == 0) {
+            return distance;
+        }
+        for (int i = 0; i < list.size() - 1; i++) {
+            AMapLocation firstpoint = list.get(i);
+            AMapLocation secondpoint = list.get(i + 1);
+            LatLng firstLatLng = new LatLng(firstpoint.getLatitude(),
+                    firstpoint.getLongitude());
+            LatLng secondLatLng = new LatLng(secondpoint.getLatitude(),
+                    secondpoint.getLongitude());
+            double betweenDis = AMapUtils.calculateLineDistance(firstLatLng,
+                    secondLatLng);
+            distance = (float) (distance + betweenDis);
+        }
+        return distance;
+    }
+
+    private String getPathLineString(List<AMapLocation> list) {
+        if (list == null || list.size() == 0) {
+            return "";
+        }
+        StringBuffer pathline = new StringBuffer();
+        for (int i = 0; i < list.size(); i++) {
+            AMapLocation location = list.get(i);
+            String locString = amapLocationToString(location);
+            pathline.append(locString).append(";");
+        }
+        String pathLineString = pathline.toString();
+        pathLineString = pathLineString.substring(0,
+                pathLineString.length() - 1);
+        return pathLineString;
+    }
+
+    private void initpolyline() {
+        mPolyoptions = new PolylineOptions();
+        mPolyoptions.width(10f);
+        mPolyoptions.color(Color.BLUE);
+    }
+
+    private String amapLocationToString(AMapLocation location) {
+        StringBuffer locString = new StringBuffer();
+        locString.append(location.getLatitude()).append(",");
+        locString.append(location.getLongitude()).append(",");
+        locString.append(location.getProvider()).append(",");
+        locString.append(location.getTime()).append(",");
+        locString.append(location.getSpeed()).append(",");
+        locString.append(location.getBearing());
+        return locString.toString();
+    }
+
+
+    private void redrawline() {
+        if (mPolyoptions.getPoints().size() > 0) {
+            aMap.clear(true);
+            aMap.addPolyline(mPolyoptions);
+        }
+    }
 }

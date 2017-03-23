@@ -44,7 +44,7 @@ public class AMapFragment extends Fragment {
             aMap.moveCamera(CameraUpdateFactory.zoomTo(16));
         }
 
-        aMapImpl =  AmapImpl.getInstance(getActivity(), aMap, bMapView);
+        aMapImpl =  AmapImpl.getInstance(getActivity(), aMap);
         proxyAMap = new ProxyAMap(aMapImpl);
 
         return view;

@@ -50,9 +50,10 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/x20"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:padding="@dimen/x20">
+        android:layout_alignParentStart="true">
 
         <TextView
             android:id="@+id/text_distance"
@@ -101,34 +102,7 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="@dimen/x480"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/relativeLayout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/y180">
 
-        <Button
-            android:id="@+id/btn_pause"
-            android:layout_width="@dimen/x160"
-            android:layout_height="@dimen/x160"
-            android:layout_margin="@dimen/x20"
-            android:background="@drawable/btn_start"
-            android:layout_alignParentLeft="true"
-            android:text="暂停" />
-
-
-        <Button
-            android:id="@+id/btn_finish"
-            android:layout_alignParentRight="true"
-            android:layout_width="@dimen/x160"
-            android:layout_height="@dimen/x160"
-            android:background="@drawable/btn_start"
-            android:layout_margin="@dimen/x20"
-            android:text="结束" />
-
-    </RelativeLayout>
 
     <TextView
         android:id="@+id/text_step"
