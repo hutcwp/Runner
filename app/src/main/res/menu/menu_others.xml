@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/music"
+        android:icon="@drawable/img_btn_datarunfragment_music"
+        android:title="@string/music"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/camera"
+        android:icon="@drawable/img_btn_datarunfragment_camera"
+        android:title="@string/camera"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/ablum"
+        android:icon="@drawable/img_btn_datarunfragment_ablum"
+        android:title="@string/album"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/map_state_change"
+        android:icon="@drawable/img_btn_home_map"
+        android:title="@string/change"
+        app:showAsAction="ifRoom" />
+
+
+
+</menu>

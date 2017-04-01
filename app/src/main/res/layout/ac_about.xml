@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorApp"
+    tools:context="com.hut.cwp.runner.activitys.about.About">
+
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/x45"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <Button
+            android:layout_width="@dimen/x60"
+            android:background="@drawable/img_btn_back"
+            android:layout_height="@dimen/x60"
+            android:onClick="onBack"/>
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:textSize="@dimen/title_size"
+            android:text="@string/about"/>
+
+    </RelativeLayout>
+
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_marginTop="@dimen/x120"
+        android:layout_width="@dimen/x400"
+        android:layout_height="@dimen/x400"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/img_about"/>
+
+    <TextView
+        android:layout_marginTop="@dimen/x120"
+        android:layout_width="match_parent"
+       android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="@string/about_content"/>
+
+    <LinearLayout
+        android:layout_width="@dimen/x380"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/x80"
+        android:layout_gravity="center_horizontal"
+       >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/about_developer" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="博     客 : "/>
+
+            <TextView
+                android:id="@+id/blog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:onClick="gotoBlog"
+                android:text="@string/blog" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="github   : "/>
+
+            <TextView
+                android:id="@+id/github"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:onClick="gotoGithub"
+                android:text="@string/github" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="@dimen/x120"
+        android:layout_height="@dimen/x120"
+        android:background="@drawable/img_about_mail"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/x20"
+        android:onClick="mailTo"
+        />
+
+
+</LinearLayout>

@@ -1,7 +1,7 @@
 package com.hut.cwp.runner.map.sub;
 
 /**
- * Created by Adminis on 2017/3/14.
+ * Map的抽象类
  */
 
 public abstract class SubMap {

@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">Runner</string>
     <string name="title_activity_runner_main">RunnerMainActivity</string>
     <string name="title_activity_map_main">MapMainActivity</string>
@@ -18,4 +19,90 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_test">Test</string>
     <string name="title_activity_my">MyActivity</string>
+    <string name="title_activity_permission">PermissionActivity</string>
+
+
+    <string-array name="permissions">
+        <item>@string/permission_recode_audio_hint</item>
+        <item>@string/permission_get_accounts_hint</item>
+        <item>@string/permission_read_phone_hint</item>
+        <item>@string/permission_call_phone_hint</item>
+        <item>@string/permission_camera_hint</item>
+        <item>@string/permission_access_fine_location_hint</item>
+        <item>@string/permission_access_coarse_location_hint</item>
+        <item>@string/permission_read_external_hint</item>
+        <item>@string/permission_white_external_hint</item>
+    </string-array>
+
+
+    <string name="permission_get_accounts_hint">没有此权限，无法开启这个功能，请开启权限。PERMISSION_GET_ACCOUNTS</string>
+    <string name="permission_read_phone_hint">没有此权限，无法开启这个功能，请开启权限。PERMISSION_READ_PHONE_STATE</string>
+    <string name="permission_call_phone_hint">没有此权限，无法开启这个功能，请开启权限。PERMISSION_CALL_PHONE</string>
+    <string name="permission_camera_hint">没有授予照相的权限，无法开启这个功能，请开启权限：照相</string>
+    <string name="permission_access_fine_location_hint">没有定位权限，无法开启这个功能，请开启定位权限：定位</string>
+    <string name="permission_access_coarse_location_hint">没有定位权限，无法开启这个功能，请开启权限：定位</string>
+    <string name="permission_read_external_hint">没有此权限，无法开启这个功能，请开启权限。PERMISSION_READ_EXTERNAL_STORAGE</string>
+    <string name="permission_white_external_hint">没有此权限，无法开启这个功能，请开启权限。PERMISSION_WRITE_EXTERNAL_STORAGE</string>
+    <string name="permission_recode_audio_hint">没有此权限，无法开启这个功能，请开启权限。PERMISSION_RECORD_AUDIO</string>
+
+    <string name="run_finish_text">结束运动</string>
+    <string name="save">保存</string>
+    <string name="open">开启</string>
+    <string name="close">关闭</string>
+    <string name="finish">结束</string>
+    <string name="without_save">不保存</string>
+    <string name="pause">暂停</string>
+    <string name="resume">继续</string>
+    <string name="cancle">取消</string>
+    <string name="distance_unit">km</string>
+    <string name="vector_unit">m/s</string>
+    <string name="calorie_unit">k ca</string>
+    <string name="vp_title_text">地图</string>
+    <string name="vp_title_chart">图表</string>
+    <string name="vp_title_other">你猜</string>
+
+    <string name="date_fomatter">######0.00</string>
+    <string name="chart_x_unit">日期(天)</string>
+    <string name="chart_y_unit">里程(米)</string>
+    <string name="datefomatter">#####0.00</string>
+    <string name="start_new_run">开启新的一次跑步</string>
+    <string name="run_resume">运动已恢复</string>
+    <string name="run_pause">运动已暂停</string>
+    <string name="local_failure">定位失败,</string>
+    <string name="please_open_permission">请打开此权限！</string>
+    <string name="pemission_is_open">所需权限已经打开！</string>
+    <string name="go_to_run">没有运动数据，快去跑步吧！</string>
+    <string name="dlg_content">是否需要保存运动数据？</string>
+    <string name="year">年</string>
+    <string name="mouth">月</string>
+    <string name="distance">距离</string>
+    <string name="day">日</string>
+    <string name="duration">时长</string>
+    <string name="calorie">卡路里</string>
+    <string name="avgvector">平均配速</string>
+    <string name="signature">年轻人就该多跑步</string>
+
+    <string name="item_about">关于</string>
+    <string name="license">开源证书</string>
+    <string name="title_activity_about">关于</string>
+    <string name="about_content">互联网寒冬又如何，认定目标往前走</string>
+    <string name="about_developer">开发者：hutcwp</string>
+    <string name="github_url">https://github.com/hutcwp</string>
+    <string name="blog_url">http://blog.csdn.net/qq_25184739</string>
+
+    <string name="blog">hutcwp.club</string>
+    <string name="github">github.com/hutcwp</string>
+
+    <string name="about">关于Runner</string>
+    <string name="home">主界面</string>
+    <string name="album">相册</string>
+    <string name="change">切换</string>
+
+    <string name="mail_to_me">mailto:hutcwp@foxmail.com</string>
+    <string name="mail_topic">Runner使用反馈与建议</string>
+    <string name="device_model">设备型号:</string>
+    <string name="sdk_version">SDK版本:</string>
+    <string name="no_mail">抱歉，在您的手机上没有找到邮箱类app！</string>
 </resources>
+
+

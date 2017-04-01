@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/item_home"
+            android:checked="true"
+            android:title="@string/home"
+            android:icon="@drawable/img_navigation_menu_info" />
+
+        <item
+            android:id="@+id/item_about"
+            android:title="@string/item_about"
+            android:checkable="false"
+            android:icon="@drawable/img_navigation_menu_info" />
+
+        <item
+            android:id="@+id/item_liscense"
+            android:checkable="false"
+            android:title="@string/license"
+            android:icon="@drawable/img_navigation_menu_info" />
+
+
+    </group>
+
+</menu>
